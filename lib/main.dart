@@ -48,7 +48,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
-        primarySwatch: createMaterialColor(Color(0xfff05e56)),
+        //0xff9FD8CB
+        primarySwatch: createMaterialColor(Color(0xff5B5F97)),
         brightness: Brightness.light,
         textTheme: TextTheme(
           headline2: TextStyle(color: Colors.black, fontSize: 40.0),

@@ -84,7 +84,7 @@ class LocationAskPage extends StatelessWidget {
                   height: 50,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: Color(0xfff05e56),
+                      color: Theme.of(context).colorScheme.primary,
                       borderRadius: BorderRadius.all(Radius.circular(25.0))),
                 ),
               ),

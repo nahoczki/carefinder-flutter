@@ -9,9 +9,8 @@ import '../DataProvider/Hospital.dart';
 
 
 class SearchPage extends StatefulWidget {
-  final Hospital testHospital;
 
-  const SearchPage(this.testHospital, {Key key}) : super(key: key);
+  const SearchPage({Key key}) : super(key: key);
 
   @override
   _SearchPageState createState() => _SearchPageState();
@@ -36,15 +35,24 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void submitSearch(String searchText) {
+    String eSearchText = searchText.toUpperCase();
+
     this.setState(() {
       this._isLoading = true;
     });
-    provider.searchHospital(_selected, searchText).then((res) => {
+
+    if (_selected == "City / State") {
+      eSearchText = '${_cityText.toUpperCase()},${_stateText.toUpperCase()}';
+    }
+
+    provider.searchHospital(_selected, eSearchText).then((res) => {
       this.setState(() {
         this._searchResults = res;
         this._isLoading = false;
       })
     });
+
+
   }
 
   @override
@@ -153,7 +161,7 @@ class _SearchPageState extends State<SearchPage> {
                                     ),
                                     child: Text(
                                         "Cancel",
-                                        style: Theme.of(context).textTheme.button),
+                                        style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 14.0)),
                                   ),
                                 )
                               ],

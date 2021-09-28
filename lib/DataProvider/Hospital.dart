@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:xml/xml.dart';
 import 'package:latlong/latlong.dart';
+import 'dart:convert';
 
 class Hospital {
   String providerId;
@@ -49,6 +52,25 @@ class Hospital {
         double.parse(hospitalElement.getElement("latitude").text),
         double.parse(hospitalElement.getElement("longitude").text),
         hospitalElement.getElement("emergency_services").text == "true",
+        0.0
+    );
+  }
+
+  factory Hospital.fromJSON(Map<String, dynamic> json) {
+    return Hospital._(
+        json['providerId'].toString(),
+        json["name"].toString(),
+        json['address'].toString(),
+        json['city'].toString(),
+        json['state'].toString(),
+        json['zipCode'].toString(),
+        json['county'].toString(),
+        json['phoneNumber'].toString(),
+        json['type'].toString(),
+        json['ownership'].toString(),
+        json['location']['latitude'] as double,
+        json['location']['longitude'] as double,
+        json['emergencyServices'].toString() == "true",
         0.0
     );
   }

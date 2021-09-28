@@ -43,7 +43,7 @@ class _RootState extends State<Root> {
   @override
   void initState() {
     super.initState();
-    provider.getHospitals().then((hospitals) => {_viewLoader(hospitals)});
+    provider.getHospitalsJSON().then((hospitals) => {_viewLoader(hospitals)});
   }
 
   void _viewLoader(List<Hospital> hospitals) async {
@@ -52,7 +52,7 @@ class _RootState extends State<Root> {
       this._closeHospitals = [...hospitals];
     });
 
-    //await _setCloseHospitals(hospitals);
+    await _setCloseHospitals(hospitals);
 
     setState(() {
       this._isLoading = false;
@@ -67,6 +67,25 @@ class _RootState extends State<Root> {
     //print(hospitals[0].name);
     return;
   }
+
+  Route _createRouteToSearch() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => const SearchPage(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -94,26 +113,27 @@ class _RootState extends State<Root> {
             style: Theme.of(context).textTheme.headline5,
           ),
           actions: [
-            InkWell(
-                onTap: () => (
-                    setState(() {
-                      this._tab = (this._tab == "Home") ? "Map" : "Home";
-                    })
-                ),
-                child: Container(
-                  child: Icon(
-                    (this._tab == "Home") ? FeatherIcons.map : FeatherIcons.list,
-                    size: 22.0,
-                  ),
-                )),
+            // InkWell(
+            //     onTap: () => (
+            //         setState(() {
+            //           this._tab = (this._tab == "Home") ? "Map" : "Home";
+            //         })
+            //     ),
+            //     child: Container(
+            //       child: Icon(
+            //         (this._tab == "Home") ? FeatherIcons.map : FeatherIcons.list,
+            //         size: 22.0,
+            //       ),
+            //     )),
             InkWell(
               onTap: () => (
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage(_hospitals[0])))
+              Navigator.of(context).push(_createRouteToSearch())
               ),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 22.0),
                   child: Icon(
                     FeatherIcons.search,
+                    color: Theme.of(context).colorScheme.primary,
                     size: 22.0,
                   ),
                 ))

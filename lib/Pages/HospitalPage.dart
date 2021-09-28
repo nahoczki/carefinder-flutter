@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../DataProvider/Hospital.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 
@@ -43,14 +44,15 @@ class _HospitalPageState extends State<HospitalPage> {
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
           leading: InkWell(
-            onTap: () => Navigator.of(context).pop(),
-            enableFeedback: false,
-            child: Container(
-              child: Icon(
-                FeatherIcons.arrowLeft,
-                size: 21.5,
-              ),
-            )
+              onTap: () => Navigator.of(context).pop(),
+              enableFeedback: false,
+              child: Container(
+                child: Icon(
+                  FeatherIcons.arrowLeft,
+                  color: Theme.of(context).colorScheme.primary,
+                  size: 21.5,
+                ),
+              )
           ),
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(1.0),
@@ -63,8 +65,22 @@ class _HospitalPageState extends State<HospitalPage> {
           centerTitle: false,
           title: Text(
             "Hospital Info",
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.headline5,
           ),
+          actions: [
+            InkWell(
+                onTap: () => (
+                    MapsLauncher.launchQuery(widget.hospital.address)
+                ),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 22.0),
+                  child: Icon(
+                    Icons.directions_outlined,
+                    color: Theme.of(context).colorScheme.primary,
+                    size: 25.0,
+                  ),
+                ))
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -116,7 +132,7 @@ class _HospitalPageState extends State<HospitalPage> {
                     dense: true,
                   )
               ),
-              HospitalDetailCard(FeatherIcons.phone, "${widget.hospital.phone}"),
+              HospitalDetailCard(FeatherIcons.phone, "${widget.hospital.phone.replaceAllMapped(RegExp(r'(\d{3})(\d{3})(\d+)'), (Match m) => "(${m[1]}) ${m[2]}-${m[3]}")}"),
               HospitalDetailCard(FeatherIcons.user, "${widget.hospital.ownership}"),
               HospitalDetailCard(FeatherIcons.mapPin, "${widget.hospital.address ??= ""}, ${widget.hospital.city ??= ""} ${widget.hospital.state ??= ""}, ${widget.hospital.zip ??= ""}")
             ],
