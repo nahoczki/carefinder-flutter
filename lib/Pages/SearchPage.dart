@@ -19,6 +19,9 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
 
   final HospitalProvider provider = new HospitalProvider();
+  var _controller = TextEditingController();
+  var _cityController = TextEditingController();
+
 
   List<Hospital> _searchResults = [];
 
@@ -29,12 +32,14 @@ class _SearchPageState extends State<SearchPage> {
   bool _isLoading = false;
 
   void setSelected(String newSelect) {
+    _controller.clear();
     setState(() {
       this._selected = newSelect;
     });
   }
 
   void submitSearch(String searchText) {
+    _controller.clear();
     String eSearchText = searchText.toUpperCase();
 
     this.setState(() {
@@ -82,6 +87,7 @@ class _SearchPageState extends State<SearchPage> {
                                       children: [
                                         Flexible(
                                           child: TextField(
+                                              controller: _cityController,
                                               onChanged: (text) {
                                                 setState(() {
                                                   this._cityText = text;
@@ -107,6 +113,7 @@ class _SearchPageState extends State<SearchPage> {
                                         SizedBox(width: 10),
                                         Flexible(
                                           child: TextField(
+                                            controller: _controller,
                                               onChanged: (text) {
                                                 setState(() {
                                                   this._stateText = text;
@@ -123,6 +130,13 @@ class _SearchPageState extends State<SearchPage> {
                                                 enabledBorder: OutlineInputBorder(
                                                   borderSide: BorderSide(color: Colors.grey[500]),
                                                 ),
+                                                suffixIcon: IconButton(
+                                                  onPressed: (() => {
+                                                    _controller.clear(),
+                                                    _cityController.clear()
+                                                  }),
+                                                  icon: Icon(Icons.clear),
+                                                ),
                                                 border: OutlineInputBorder(),
                                                 fillColor: Colors.white,
                                                 filled: true,
@@ -134,6 +148,8 @@ class _SearchPageState extends State<SearchPage> {
                                     )
                                 ) : Flexible(
                                   child: TextField(
+                                      controller: _controller,
+                                      autofocus: true,
                                       onSubmitted: (text) {
                                         submitSearch(text);
                                       },
@@ -145,6 +161,10 @@ class _SearchPageState extends State<SearchPage> {
                                         enabledBorder: OutlineInputBorder(
                                           // width: 0.0 produces a thin "hairline" border
                                           borderSide: BorderSide(color: Colors.grey[500]),
+                                        ),
+                                        suffixIcon: IconButton(
+                                          onPressed: _controller.clear,
+                                          icon: Icon(Icons.clear),
                                         ),
                                         border: OutlineInputBorder(),
                                         fillColor: Colors.white,

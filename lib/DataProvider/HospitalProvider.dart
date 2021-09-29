@@ -15,6 +15,11 @@ class HospitalProvider {
 
   Future<List<Hospital>> searchHospital(String type, String search) async {
     String convType = type.toLowerCase();
+
+    if (convType == "id") {
+      convType = "providerId";
+    }
+
     String cleanedSearch = search.trim().toUpperCase();
     String endpoint;
     List<Hospital> returnHospitals;
