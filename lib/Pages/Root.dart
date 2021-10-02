@@ -133,7 +133,6 @@ class _RootState extends State<Root> {
                   padding: EdgeInsets.symmetric(horizontal: 22.0),
                   child: Icon(
                     FeatherIcons.search,
-                    color: Theme.of(context).colorScheme.primary,
                     size: 22.0,
                   ),
                 ))

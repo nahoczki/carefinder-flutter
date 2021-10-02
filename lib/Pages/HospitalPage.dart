@@ -28,6 +28,212 @@ class HospitalPage extends StatefulWidget {
 
 class _HospitalPageState extends State<HospitalPage> {
   GoogleMapController mapController;
+  bool _isLoading = true;
+
+  String darkMap = '''
+  [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#212121"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#212121"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.country",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.locality",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#bdbdbd"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.medical",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.medical",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#5b2c2d"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#181818"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#1b1b1b"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#2c2c2c"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#8a8a8a"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#373737"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#3c3c3c"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway.controlled_access",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#4e4e4e"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#000000"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#3d3d3d"
+      }
+    ]
+  }
+]''';
 
   bool isMapLoading;
 
@@ -49,7 +255,6 @@ class _HospitalPageState extends State<HospitalPage> {
               child: Container(
                 child: Icon(
                   FeatherIcons.arrowLeft,
-                  color: Theme.of(context).colorScheme.primary,
                   size: 21.5,
                 ),
               )
@@ -86,21 +291,28 @@ class _HospitalPageState extends State<HospitalPage> {
           child: Column(
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.33,
-                child: GoogleMap(
-                  myLocationButtonEnabled: false,
-                  zoomGesturesEnabled: false,
-                  rotateGesturesEnabled: false,
-                  tiltGesturesEnabled: false,
-                  scrollGesturesEnabled: false,
-                  initialCameraPosition: CameraPosition(
-                    target: LatLng(widget.hospital.lat, widget.hospital.long),
-                    zoom: 15,
-                  ),
-                  onMapCreated: (GoogleMapController controller) {
-                    mapController = controller;
-                  },
-                ),
+                  height: MediaQuery.of(context).size.height * 0.33,
+                  child: Visibility(
+                    visible: !_isLoading,
+                    child: GoogleMap(
+                      myLocationButtonEnabled: false,
+                      zoomGesturesEnabled: false,
+                      rotateGesturesEnabled: false,
+                      tiltGesturesEnabled: false,
+                      scrollGesturesEnabled: false,
+                      initialCameraPosition: CameraPosition(
+                        target: LatLng(widget.hospital.lat, widget.hospital.long),
+                        zoom: 15,
+                      ),
+                      onMapCreated: (GoogleMapController controller) {
+                        mapController = controller;
+                        mapController.setMapStyle(MediaQuery.of(context).platformBrightness == Brightness.dark ? darkMap : "");
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      },
+                    ),
+                  )
               ),
               Container(
                   alignment: Alignment.topLeft,
@@ -127,6 +339,7 @@ class _HospitalPageState extends State<HospitalPage> {
               ),
               Card(
                   elevation: 0,
+                  color: Theme.of(context).canvasColor,
                   child: ListTile(
                     title: Text("Details", style: Theme.of(context).textTheme.overline),
                     dense: true,

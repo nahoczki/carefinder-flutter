@@ -14,6 +14,7 @@ class HospitalCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         elevation: 0,
+        color: Theme.of(context).canvasColor,
         child: Padding(
           padding: EdgeInsets.all(2.0),
           child: ListTile(

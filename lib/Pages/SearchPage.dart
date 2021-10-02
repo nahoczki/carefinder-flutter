@@ -73,7 +73,7 @@ class _SearchPageState extends State<SearchPage> {
                 flex: 2,
                 child: Container(
                     padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                    color: Colors.grey[200],
+                    color: Theme.of(context).secondaryHeaderColor,
                     width: double.infinity,
                     child: Column(
                       children: [
@@ -104,7 +104,7 @@ class _SearchPageState extends State<SearchPage> {
                                                   borderSide: BorderSide(color: Colors.grey[500]),
                                                 ),
                                                 border: OutlineInputBorder(),
-                                                fillColor: Colors.white,
+                                                fillColor: Colors.transparent,
                                                 filled: true,
                                                 floatingLabelBehavior: FloatingLabelBehavior.never,
                                               )
@@ -138,7 +138,7 @@ class _SearchPageState extends State<SearchPage> {
                                                   icon: Icon(Icons.clear),
                                                 ),
                                                 border: OutlineInputBorder(),
-                                                fillColor: Colors.white,
+                                                fillColor: Colors.transparent,
                                                 filled: true,
                                                 floatingLabelBehavior: FloatingLabelBehavior.never,
                                               )
@@ -167,7 +167,7 @@ class _SearchPageState extends State<SearchPage> {
                                           icon: Icon(Icons.clear),
                                         ),
                                         border: OutlineInputBorder(),
-                                        fillColor: Colors.white,
+                                        fillColor: Colors.transparent,
                                         filled: true,
                                         floatingLabelBehavior: FloatingLabelBehavior.never,
                                       )
@@ -247,14 +247,14 @@ class _SearchPageState extends State<SearchPage> {
                           padding: EdgeInsets.only(left: 20, top: 13, bottom: 13),
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
-                              color: Colors.grey[50],
+                              color: Theme.of(context).shadowColor,
                               border: Border(
                                   top: BorderSide(
-                                    color: Colors.grey[300],
+                                    color: Theme.of(context).dividerColor,
                                     width: 1.0,
                                   ),
                                   bottom: BorderSide(
-                                    color: Colors.grey[300],
+                                    color: Theme.of(context).dividerColor,
                                     width: 1.0,
                                   )
                               )

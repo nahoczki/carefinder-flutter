@@ -13,6 +13,7 @@ class HospitalDetailCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+        color: Theme.of(context).canvasColor,
         margin: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
         elevation: 0,
         child: Row(

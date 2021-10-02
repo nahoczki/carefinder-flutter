@@ -33,7 +33,7 @@ class Splash extends HookWidget {
     final animationController = useAnimationController();
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       body: Center(
         child: Lottie.asset(
           "assets/logo.json",

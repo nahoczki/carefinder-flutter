@@ -33,6 +33,7 @@ class HospitalProvider {
         searchSplit[1] = USStates.getAbbreviation(searchSplit[1]);
       }
 
+      //?city=kenosha&state=WI
       endpoint = '?${convTypeSplit[0].trim()}=${searchSplit[0].trim()}&${convTypeSplit[1].trim()}=${searchSplit[1].trim()}';
 
     }
@@ -45,11 +46,8 @@ class HospitalProvider {
 
     print(convType);
 
+    //?name=hospital
     endpoint == null ? endpoint = '?$convType=$cleanedSearch': endpoint = endpoint;
-
-    //returnHospitals = await this.getHospitals('/$convType/$cleanedSearch');
-
-
 
     returnHospitals = await this.getHospitalsJSON(endpoint);
 

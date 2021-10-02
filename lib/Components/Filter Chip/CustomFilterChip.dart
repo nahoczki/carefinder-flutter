@@ -9,7 +9,12 @@ class CustomFilterChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Chip(
-      backgroundColor: title == selected ? Theme.of(context).colorScheme.primary : Colors.grey[500],
+      backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ? Colors.transparent : title == selected ? Theme.of(context).colorScheme.primary : Colors.grey[500],
+      shape: StadiumBorder(
+          side: BorderSide(
+            color: MediaQuery.of(context).platformBrightness != Brightness.dark ? Colors.transparent : title == selected ? Theme.of(context).colorScheme.primary : Colors.grey[500],
+          )
+      ),
       label: Text(
         title,
         overflow: TextOverflow.ellipsis,

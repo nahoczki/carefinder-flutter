@@ -22,8 +22,11 @@ class HospitalTile extends StatelessWidget {
           padding: EdgeInsets.all(10),
           margin: EdgeInsets.only(right: 10, top: 5, bottom: 5),
           decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(color: Colors.grey[500], width: 0.5),
+            color: Theme.of(context).canvasColor,
+            border: Border.all(
+                color: Colors.grey[500],
+                width: 0.5
+            ),
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
           child: Column(

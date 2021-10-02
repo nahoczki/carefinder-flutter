@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.only(
                     top: 15, left: 20, right: 20, bottom: 15),
                 width: double.infinity,
-                color: Colors.grey[100],
+                color: Theme.of(context).secondaryHeaderColor,
                 child: Row(
                   children: [
                     Image(
@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                 )),
             widget.isLoading ? Container(
                 height: MediaQuery.of(context).size.height * 0.22,
-                color: Colors.grey[100],
+                color: Theme.of(context).secondaryHeaderColor,
                 padding: EdgeInsets.only(left: 20),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                 ),
             ) : Container(
               height: MediaQuery.of(context).size.height * 0.22,
-              color: Colors.grey[100],
+              color: Theme.of(context).secondaryHeaderColor,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.only(left: 20.0, right: 10.0),
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.only(
                     top: 15, left: 20, right: 20, bottom: 15),
                 width: double.infinity,
-                color: Colors.grey[100],
+                color: Theme.of(context).secondaryHeaderColor,
                 child: Row(
                   children: [
                     Image(

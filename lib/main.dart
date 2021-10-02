@@ -35,17 +35,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Carefinder',
       debugShowCheckedModeBanner: false,
-
+      themeMode: ThemeMode.system,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         //0xff9FD8CB
@@ -67,6 +58,8 @@ class MyApp extends StatelessWidget {
         ),
         canvasColor: Colors.white,
         dividerColor: Colors.grey[500],
+        secondaryHeaderColor: Colors.grey[100],
+        shadowColor: Colors.grey[50],
         // This makes the visual density adapt to the platform that you run
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
@@ -79,6 +72,45 @@ class MyApp extends StatelessWidget {
             ),
             actionsIconTheme: IconThemeData(
                 color: Colors.grey[800]
+            )
+        ),
+      ),
+      darkTheme: ThemeData(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        //0xff9FD8CB
+        primarySwatch: createMaterialColor(Color(0xff5B5F97)),
+        brightness: Brightness.dark,
+        textTheme: TextTheme(
+          headline2: TextStyle(color: Colors.grey[100], fontSize: 40.0),
+          headline3: TextStyle(color: Colors.grey[100], fontSize: 32.0),
+          headline4: TextStyle(color: Colors.grey[200], fontSize: 18.0),
+          headline5: TextStyle(color: Colors.grey[300], fontSize: 18.0, fontWeight: FontWeight.w700),
+          headline6: TextStyle(color: Colors.grey[300], fontSize: 13.0, fontWeight: FontWeight.w700),
+          bodyText2: TextStyle(color: Colors.grey[100], fontSize: 16.0, fontWeight: FontWeight.w700),
+          bodyText1: TextStyle(color: Colors.grey[100], fontSize: 14.0, fontWeight: FontWeight.w700),
+          subtitle1: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w700),
+          subtitle2: TextStyle(color: Colors.grey[100], fontSize: 13.0),
+          caption: TextStyle(color: Colors.grey[300], fontSize: 11.0, letterSpacing: 0.5),
+          overline: TextStyle(color: Colors.grey[300], fontSize: 11.0, letterSpacing: 1.2, fontWeight: FontWeight.w600),
+          button: TextStyle(color: Colors.white, fontSize: 14.0),
+        ),
+        canvasColor: Colors.grey[900],
+        dividerColor: Colors.grey[900],
+        secondaryHeaderColor: Color(0xff121212),
+        shadowColor: Color(0x9e070707),
+        // This makes the visual density adapt to the platform that you run
+        // the app on. For desktop platforms, the controls will be smaller and
+        // closer together (more dense) than on mobile platforms.
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        appBarTheme: AppBarTheme(
+            color: Color(0xff090909),
+            elevation: 0.0,
+            iconTheme: IconThemeData(
+                color: Colors.grey[200]
+            ),
+            actionsIconTheme: IconThemeData(
+                color: createMaterialColor(Color(0xff9094ea))
             )
         ),
       ),

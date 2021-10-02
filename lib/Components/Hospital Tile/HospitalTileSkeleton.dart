@@ -7,12 +7,15 @@ class HospitalTileSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SkeletonAnimation(
+        gradientColor: Theme.of(context).secondaryHeaderColor,
+        shimmerColor: Theme.of(context).canvasColor,
+        curve: Curves.easeInOut,
         child: Container(
           width: MediaQuery.of(context).size.width * 0.35,
           margin: EdgeInsets.only(right: 10, top: 5, bottom: 5),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10)),
-              color: Colors.grey[300]),
+              color: Theme.of(context).canvasColor),
         ));
   }
 }
