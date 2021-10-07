@@ -293,7 +293,7 @@ class _HospitalPageState extends State<HospitalPage> {
               SizedBox(
                   height: MediaQuery.of(context).size.height * 0.33,
                   child: Visibility(
-                    visible: !_isLoading,
+                    //visible: _isLoading,
                     child: GoogleMap(
                       myLocationButtonEnabled: false,
                       zoomGesturesEnabled: false,

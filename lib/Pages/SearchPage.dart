@@ -93,8 +93,9 @@ class _SearchPageState extends State<SearchPage> {
                                                   this._cityText = text;
                                                 });
                                               },
+                                              autofocus: true,
                                               textInputAction: TextInputAction.next,
-                                              style: TextStyle(color: Colors.grey[800], fontSize: 16.0),
+                                              style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ? Colors.white : Colors.black, fontSize: 16.0),
                                               decoration: InputDecoration(
                                                 hintText: "City",
                                                 contentPadding: EdgeInsets.all(10.0),
@@ -123,7 +124,7 @@ class _SearchPageState extends State<SearchPage> {
                                                 submitSearch(text);
                                               },
                                               textInputAction: TextInputAction.search,
-                                              style: TextStyle(color: Colors.grey[800], fontSize: 16.0),
+                                              style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ? Colors.white : Colors.black, fontSize: 16.0),
                                               decoration: InputDecoration(
                                                 hintText: "State",
                                                 contentPadding: EdgeInsets.all(10.0),
@@ -135,7 +136,7 @@ class _SearchPageState extends State<SearchPage> {
                                                     _controller.clear(),
                                                     _cityController.clear()
                                                   }),
-                                                  icon: Icon(Icons.clear),
+                                                  icon: Icon(Icons.clear, color: MediaQuery.of(context).platformBrightness == Brightness.dark ? Colors.white : Colors.black,),
                                                 ),
                                                 border: OutlineInputBorder(),
                                                 fillColor: Colors.transparent,
@@ -154,7 +155,7 @@ class _SearchPageState extends State<SearchPage> {
                                         submitSearch(text);
                                       },
                                       textInputAction: TextInputAction.search,
-                                      style: TextStyle(color: Colors.grey[800], fontSize: 16.0),
+                                      style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ? Colors.white : Colors.black, fontSize: 16.0),
                                       decoration: InputDecoration(
                                         contentPadding: EdgeInsets.all(10.0),
                                         prefixIcon: Icon(FeatherIcons.search, size: 17),
@@ -164,7 +165,7 @@ class _SearchPageState extends State<SearchPage> {
                                         ),
                                         suffixIcon: IconButton(
                                           onPressed: _controller.clear,
-                                          icon: Icon(Icons.clear),
+                                          icon: Icon(Icons.clear, color: MediaQuery.of(context).platformBrightness == Brightness.dark ? Colors.white : Colors.black,),
                                         ),
                                         border: OutlineInputBorder(),
                                         fillColor: Colors.transparent,
