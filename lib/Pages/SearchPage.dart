@@ -226,6 +226,12 @@ class _SearchPageState extends State<SearchPage> {
                                   SizedBox(width: 5),
                                   InkWell(
                                       enableFeedback: false,
+                                      onTap: () => (setSelected("ZipCode")),
+                                      child: CustomFilterChip("ZipCode", _selected)
+                                  ),
+                                  SizedBox(width: 5),
+                                  InkWell(
+                                      enableFeedback: false,
                                       onTap: () => (setSelected("City / State")),
                                       child: CustomFilterChip("City / State", _selected)
                                   ),

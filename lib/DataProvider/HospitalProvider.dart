@@ -38,6 +38,8 @@ class HospitalProvider {
 
     }
 
+    convType == "zipcode" ? convType = "zipCode" : convType = convType;
+
     if (convType == "state") {
       if (cleanedSearch.length != 2) {
         cleanedSearch = USStates.getAbbreviation(cleanedSearch);
