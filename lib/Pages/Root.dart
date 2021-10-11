@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:latlong/latlong.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 import '../DataProvider/HospitalProvider.dart';
@@ -54,9 +55,15 @@ class _RootState extends State<Root> {
 
     await _setCloseHospitals(hospitals);
 
+    HapticFeedback.lightImpact();
     setState(() {
       this._isLoading = false;
     });
+  }
+
+  void onClick(BuildContext context) {
+    HapticFeedback.lightImpact();
+    Navigator.of(context).push(_createRouteToSearch());
   }
 
   Future<void> _setCloseHospitals(List<Hospital> hospitals) async {
@@ -127,7 +134,7 @@ class _RootState extends State<Root> {
             //     )),
             InkWell(
               onTap: () => (
-              Navigator.of(context).push(_createRouteToSearch())
+                onClick(context)
               ),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 22.0),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 // import 'package:smart_select/smart_select.dart';
+import 'package:flutter/services.dart';
 
 import '../Components/Filter Chip/CustomFilterChip.dart';
 import '../Components/Hospital Card/HospitalCard.dart';
@@ -33,6 +34,7 @@ class _SearchPageState extends State<SearchPage> {
 
   void setSelected(String newSelect) {
     _controller.clear();
+    HapticFeedback.lightImpact();
     setState(() {
       this._selected = newSelect;
     });
@@ -40,6 +42,7 @@ class _SearchPageState extends State<SearchPage> {
 
   void submitSearch(String searchText) {
     _controller.clear();
+    HapticFeedback.lightImpact();
     String eSearchText = searchText.toUpperCase();
 
     this.setState(() {

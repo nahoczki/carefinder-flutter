@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../DataProvider/Hospital.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter/services.dart';
 import '../../Pages/HospitalPage.dart';
 
 class HospitalTile extends StatelessWidget {
@@ -8,14 +9,19 @@ class HospitalTile extends StatelessWidget {
 
   const HospitalTile(this.hospital, {Key key}) : super(key: key);
 
+  void onClick(BuildContext context) {
+    HapticFeedback.lightImpact();
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => HospitalPage(hospital)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => (
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => HospitalPage(hospital)),
-          )
+          onClick(context)
       ),
       child: Container(
           width: MediaQuery.of(context).size.width * 0.35,

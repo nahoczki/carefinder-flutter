@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:location/location.dart';
+import 'package:flutter/services.dart';
 import 'Root.dart';
 
 
@@ -9,6 +10,7 @@ class LocationAskPage extends StatelessWidget {
 
   Future<Navigator> _askForLocationAndPush(BuildContext context) async {
     Location location = new Location();
+    HapticFeedback.lightImpact();
 
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;

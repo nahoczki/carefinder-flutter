@@ -1,4 +1,5 @@
 import 'package:carefinderclient/DataProvider/Hospital.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import '../../Pages/HospitalPage.dart';
 
@@ -10,6 +11,14 @@ class HospitalCard extends StatelessWidget {
         Key key,
       }) : super(key: key);
 
+  void onClick(BuildContext context) {
+    HapticFeedback.lightImpact();
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => HospitalPage(_hospital)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -19,10 +28,7 @@ class HospitalCard extends StatelessWidget {
           padding: EdgeInsets.all(2.0),
           child: ListTile(
             onTap: () => (
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => HospitalPage(_hospital)),
-              )
+              onClick(context)
             ),
             enableFeedback: true,
             // leading: Icon(Icons.arrow_drop_down_circle),
