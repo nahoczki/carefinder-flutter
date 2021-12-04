@@ -9,8 +9,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class HospitalProvider {
 
-  final String urlSlug = dotenv.env['API_URL'];
-  final String apiKey = dotenv.env['API_KEY'];
+  //final String urlSlug = dotenv.env['API_URL'];
+  //final String apiKey = dotenv.env['API_KEY'];
   final String jsonUrl = dotenv.env['API_JSON_URL'];
 
   Future<List<Hospital>> searchHospital(String type, String search) async {
@@ -58,27 +58,27 @@ class HospitalProvider {
   }
 
   ///XML ENDPOINT
-  Future<List<Hospital>> getHospitals([String endpoint = '/']) async {
-    final response = await http
-        .get(Uri.parse('$urlSlug$endpoint'), headers: {"x-api-key" : apiKey});
-
-    if (response.statusCode == 200) {
-
-      XmlDocument doc = XmlDocument.parse(response.body);
-      final List<Hospital> hospitals = doc
-          .findAllElements("item")
-          .map<Hospital>((e) => Hospital.fromElement(e))
-          .toList();
-
-      print(hospitals.length);
-
-      return hospitals;
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load hospitals');
-    }
-  }
+  // Future<List<Hospital>> getHospitals([String endpoint = '/']) async {
+  //   final response = await http
+  //       .get(Uri.parse('$urlSlug$endpoint'), headers: {"x-api-key" : apiKey});
+  //
+  //   if (response.statusCode == 200) {
+  //
+  //     XmlDocument doc = XmlDocument.parse(response.body);
+  //     final List<Hospital> hospitals = doc
+  //         .findAllElements("item")
+  //         .map<Hospital>((e) => Hospital.fromElement(e))
+  //         .toList();
+  //
+  //     print(hospitals.length);
+  //
+  //     return hospitals;
+  //   } else {
+  //     // If the server did not return a 200 OK response,
+  //     // then throw an exception.
+  //     throw Exception('Failed to load hospitals');
+  //   }
+  // }
 
   ///JSON ENDPOINT
   Future<List<Hospital>> getHospitalsJSON([String endpoint = '/']) async {
