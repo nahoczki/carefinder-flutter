@@ -10,8 +10,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class HospitalProvider {
 
   //final String urlSlug = dotenv.env['API_URL'];
-  //final String apiKey = dotenv.env['API_KEY'];
-  final String jsonUrl = dotenv.env['API_JSON_URL'];
+  final String apiKey = dotenv.env['API_KEY'];
+  final String urlSlug = dotenv.env['API_URL'];
 
   Future<List<Hospital>> searchHospital(String type, String search) async {
     String convType = type.toLowerCase();
@@ -83,9 +83,9 @@ class HospitalProvider {
   ///JSON ENDPOINT
   Future<List<Hospital>> getHospitalsJSON([String endpoint = '/']) async {
     final response = await http
-        .get(Uri.parse('$jsonUrl$endpoint'));
+        .get(Uri.parse('$urlSlug/hospitals$endpoint'), headers: {"key": apiKey});
 
-    print('$jsonUrl$endpoint');
+    print('$urlSlug/hospitals$endpoint');
 
     if (response.statusCode == 200) {
 

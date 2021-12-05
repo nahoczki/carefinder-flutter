@@ -6,7 +6,7 @@ Client built using Flutter built around my Carefinder Spring Boot Application
 
 ## Todo
 
-- [ ] Implement new API's routes
+- [x] Implement new API
 - [ ] Add Authentication -- Login and Register
 - [ ] Add create/edit hospitals for admin users
 - [ ] Clean up code

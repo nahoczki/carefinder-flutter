@@ -66,7 +66,7 @@ class Hospital {
         json['zipCode'].toString(),
         json['county'].toString(),
         json['phoneNumber'].toString(),
-        json['type'].toString(),
+        json['hospitalType'].toString(),
         json['ownership'].toString(),
         json['location']['latitude'] as double,
         json['location']['longitude'] as double,
