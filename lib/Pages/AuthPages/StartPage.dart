@@ -3,7 +3,8 @@ import 'SignUpPage.dart';
 import 'SignInPage.dart';
 
 class StartPage extends StatelessWidget {
-  const StartPage({Key key}) : super(key: key);
+  final allowLocation;
+  const StartPage(this.allowLocation, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class StartPage extends StatelessWidget {
                   onTap: () => (
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const SignUpPage())
+                          MaterialPageRoute(builder: (context) => SignUpPage(allowLocation))
                       )
                   ),
                   child: Container(
@@ -54,7 +55,7 @@ class StartPage extends StatelessWidget {
                   onTap: () => (
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const SignInPage())
+                          MaterialPageRoute(builder: (context) => SignInPage(allowLocation))
                       )
                   ),
                   child: Text(

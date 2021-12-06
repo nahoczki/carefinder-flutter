@@ -50,7 +50,7 @@ class Splash extends HookWidget {
                 bool allowed = await _allowLocation();
                 Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => jwt != "" ? allowed ? Root() : LocationAskPage() : StartPage()));
+                    MaterialPageRoute(builder: (context) => jwt != "" ? allowed ? Root() : LocationAskPage() : StartPage(allowed)));
               }
             });
             // Configure the AnimationController with the duration of the

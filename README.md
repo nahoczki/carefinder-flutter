@@ -7,7 +7,7 @@ Client built using Flutter built around my Carefinder Spring Boot Application
 ## Todo
 
 - [x] Implement new API
-- [ ] Add Authentication -- Login and Register
+- [x] Add Authentication -- Login and Register
 - [ ] Add create/edit hospitals for admin users
 - [ ] Clean up code
 - [x] Write code
@@ -17,7 +17,7 @@ Client built using Flutter built around my Carefinder Spring Boot Application
 To run this project, you will need to add the following environment variables
 
 `API_URL` - URL to API resource
-
+`API_KEY` - API key retrieved from Server
 
 
 ## Run Locally

@@ -2,10 +2,12 @@ import 'package:carefinderclient/DataProvider/AuthProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
+import '../LocationAskPage.dart';
 import '../Root.dart';
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key key}) : super(key: key);
+  final allowLocation;
+  const SignUpPage(this.allowLocation, {Key key}) : super(key: key);
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -30,7 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
     try {
       await provider.register(email, password);
 
-      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Root()), (_) => false);
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => widget.allowLocation ? Root() : LocationAskPage()), (_) => false);
     } catch (e) {
       print(e.toString());
       setErr('Error Signing up, Email is taken');

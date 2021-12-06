@@ -17,7 +17,7 @@ class _UserPageState extends State<UserPage> {
 
   void signOut() async {
     await widget.auth.signOut();
-    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => StartPage()), (_) => false);
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => StartPage(false)), (_) => false);
   }
 
   @override

@@ -1,10 +1,12 @@
+import 'package:carefinderclient/Pages/LocationAskPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import '../../DataProvider/AuthProvider.dart';
 import '../Root.dart';
 
 class SignInPage extends StatefulWidget {
-  const SignInPage({Key key}) : super(key: key);
+  final allowLocation;
+  const SignInPage(this.allowLocation, {Key key}) : super(key: key);
 
   @override
   _SignInPageState createState() => _SignInPageState();
@@ -22,7 +24,7 @@ class _SignInPageState extends State<SignInPage> {
     try {
       final retUser = await provider.login(email, password);
       print(retUser);
-      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Root()), (_) => false);
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => widget.allowLocation ? Root() : LocationAskPage()), (_) => false);
     } catch (e) {
       print(e.toString());
       setErr("Email or password is incorrect");
