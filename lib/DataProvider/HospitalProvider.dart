@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'Hospital.dart';
 import 'dart:convert';
-import 'package:xml/xml.dart';
 import 'package:http/http.dart' as http;
 import 'package:us_states/us_states.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';

@@ -1,8 +1,6 @@
-import 'dart:ffi';
 
 import 'package:xml/xml.dart';
 import 'package:latlong/latlong.dart';
-import 'dart:convert';
 
 class Hospital {
   String providerId;

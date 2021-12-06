@@ -70,12 +70,7 @@ class _HomePageState extends State<HomePage> {
     if (!widget.isLoading && (widget.isLoading ? init : !init)) {
       _loadMore();
     }
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+
     return LazyLoadScrollView(
         isLoading: widget.isLoading,
         onEndOfPage: () => _loadMore(),

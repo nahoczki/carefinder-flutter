@@ -54,10 +54,10 @@ class MyApp extends StatelessWidget {
           subtitle2: TextStyle(color: Colors.grey[900], fontSize: 13.0),
           caption: TextStyle(color: Colors.grey[700], fontSize: 11.0, letterSpacing: 0.5),
           overline: TextStyle(color: Colors.grey[700], fontSize: 11.0, letterSpacing: 1.2, fontWeight: FontWeight.w600),
-          button: TextStyle(color: Colors.black, fontSize: 14.0),
+          button: TextStyle(color: Colors.white, fontSize: 14.0),
         ),
         canvasColor: Colors.white,
-        dividerColor: Colors.grey[500],
+        dividerColor: Colors.grey[100],
         secondaryHeaderColor: Colors.grey[100],
         shadowColor: Colors.grey[50],
         // This makes the visual density adapt to the platform that you run

@@ -1,9 +1,11 @@
+import 'package:carefinderclient/Pages/AuthPages/StartPage.dart';
 import 'package:carefinderclient/Pages/LocationAskPage.dart';
 import 'package:carefinderclient/Pages/Root.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Splash extends HookWidget {
   const Splash({Key key}) : super(key: key);
@@ -43,10 +45,12 @@ class Splash extends HookWidget {
           onLoaded: (composition) {
             animationController.addStatusListener((status) async {
               if (status == AnimationStatus.completed) {
+                final prefs = await SharedPreferences.getInstance();
+                final jwt = prefs.getString("auth") ?? "";
                 bool allowed = await _allowLocation();
                 Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => allowed ? Root() : LocationAskPage()));
+                    MaterialPageRoute(builder: (context) => jwt != "" ? allowed ? Root() : LocationAskPage() : StartPage()));
               }
             });
             // Configure the AnimationController with the duration of the

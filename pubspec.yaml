@@ -47,6 +47,8 @@ dependencies:
   smart_select: ^4.3.2
   flutter_dotenv: ^5.0.2
   maps_launcher: ^2.0.1
+  shared_preferences: ^2.0.9
+  localstore: ^1.2.1
 
 dev_dependencies:
   flutter_test:
