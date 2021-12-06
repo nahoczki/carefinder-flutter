@@ -25,6 +25,7 @@ class _SignInPageState extends State<SignInPage> {
       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Root()), (_) => false);
     } catch (e) {
       print(e.toString());
+      setErr("Email or password is incorrect");
     }
   }
 

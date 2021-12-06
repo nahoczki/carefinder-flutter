@@ -3,6 +3,8 @@ import 'package:carefinderclient/Components/Admin%20Tile/AdminTile.dart';
 import 'package:carefinderclient/DataProvider/AuthProvider.dart';
 import 'package:flutter/material.dart';
 
+import 'AuthPages/StartPage.dart';
+
 class UserPage extends StatefulWidget {
   final AuthProvider auth;
   UserPage(this.auth, {Key key}) : super(key: key);
@@ -12,6 +14,12 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+
+  void signOut() async {
+    await widget.auth.signOut();
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => StartPage()), (_) => false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -44,20 +52,23 @@ class _UserPageState extends State<UserPage> {
               future: widget.auth.getRole(),
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data == "ADMIN") {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text("Admin Controls", style: Theme.of(context).textTheme.overline),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          AdminTile("User Management", widget.auth, "users"),
-                          AdminTile("Hospital Management", widget.auth, "hospitals")
-                        ],
-                      )
-                    ],
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text("Admin Controls", style: Theme.of(context).textTheme.overline),
+                        Wrap(
+                          alignment: WrapAlignment.center,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: [
+                            AdminTile("User Management", widget.auth, "users"),
+                            AdminTile("Hospital Management", widget.auth, "hospitals"),
+                            AdminTile("API keys Management", widget.auth, "apikeys"),
+                          ],
+                        )
+                      ],
+                    ),
                   );
                 } else if(snapshot.hasData && snapshot.data == "USER") {
                   return Column(
@@ -80,7 +91,7 @@ class _UserPageState extends State<UserPage> {
               }),
           Spacer(),
           InkWell(
-            onTap: () => {},
+            onTap: () => (signOut()),
             child: Container(
               child: Center(
                 child: Text("Sign Out",

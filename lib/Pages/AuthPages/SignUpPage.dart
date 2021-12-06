@@ -1,5 +1,8 @@
+import 'package:carefinderclient/DataProvider/AuthProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+
+import '../Root.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key key}) : super(key: key);
@@ -9,6 +12,8 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+
+  final AuthProvider provider = new AuthProvider();
 
   String _err = "";
   String _email = "";
@@ -20,6 +25,15 @@ class _SignUpPageState extends State<SignUpPage> {
     if (_password != _confirmPassword) {
       setErr('Passwords do not match');
       return;
+    }
+
+    try {
+      await provider.register(email, password);
+
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Root()), (_) => false);
+    } catch (e) {
+      print(e.toString());
+      setErr('Error Signing up, Email is taken');
     }
 
   }

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'Hospital.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -104,6 +106,23 @@ class HospitalProvider {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       throw Exception('Failed to load hospitals');
+    }
+  }
+
+  Future<bool> deleteHospital(String providerId) async {
+    final prefs = await SharedPreferences.getInstance();
+    final response = await http
+        .delete(Uri.parse('$urlSlug/hospitals?providerId=$providerId'), headers: {"key": apiKey, "Authorization": prefs.getString("auth")});
+
+    //print('$urlSlug/hospitals$endpoint');
+
+    if (response.statusCode == 200) {
+      // Successful delete
+      return true;
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw false;
     }
   }
 }

@@ -49,6 +49,7 @@ dependencies:
   maps_launcher: ^2.0.1
   shared_preferences: ^2.0.9
   localstore: ^1.2.1
+  modal_bottom_sheet: ^2.0.0
 
 dev_dependencies:
   flutter_test:
