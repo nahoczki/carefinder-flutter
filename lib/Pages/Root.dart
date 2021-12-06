@@ -45,7 +45,7 @@ class _RootState extends State<Root> {
       this._closeHospitals = [...hospitals];
     });
 
-    //await _setCloseHospitals(hospitals);
+    await _setCloseHospitals(hospitals);
 
     HapticFeedback.lightImpact();
     setState(() {

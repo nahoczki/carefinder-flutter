@@ -157,7 +157,7 @@ class AuthProvider {
     //print('$urlSlug/auth/login?email=$email&password=$password');
 
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
 
       final dynamic decode = json.decode(response.body)["data"];
       final Apikey key = Apikey.fromJSON(decode);
