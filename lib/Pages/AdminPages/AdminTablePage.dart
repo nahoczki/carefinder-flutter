@@ -1,6 +1,9 @@
+import 'package:carefinderclient/Components/Api%20Key%20Card/ApiKeyCard.dart';
 import 'package:carefinderclient/Components/Hospital%20Card/HospitalAdminCard.dart';
 import 'package:carefinderclient/Components/Hospital%20Card/HospitalCard.dart';
+import 'package:carefinderclient/Components/Modals/CreateApiKeyModal.dart';
 import 'package:carefinderclient/Components/User%20Card/UserCard.dart';
+import 'package:carefinderclient/DataProvider/Apikey.dart';
 import 'package:carefinderclient/DataProvider/AuthProvider.dart';
 import 'package:carefinderclient/DataProvider/Hospital.dart';
 import 'package:carefinderclient/DataProvider/HospitalProvider.dart';
@@ -8,6 +11,7 @@ import 'package:carefinderclient/DataProvider/User.dart';
 import 'package:carefinderclient/Pages/LoadingPage.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class AdminTablePage extends StatefulWidget {
   final String type;
@@ -24,6 +28,7 @@ class _AdminTablePageState extends State<AdminTablePage> {
 
   List<Hospital> hospitals = [];
   List<User> users = [];
+  List<Apikey> apiKeys = [];
   bool isLoading = true;
   bool authorized = false;
 
@@ -42,7 +47,14 @@ class _AdminTablePageState extends State<AdminTablePage> {
 
     try {
       switch (widget.type) {
-        case "apikeys": return;
+        case "apikeys":
+          widget.auth.getApiKeys().then((apikeys) => {
+            this.setState(() {
+              this.apiKeys = apikeys;
+              this.isLoading = false;
+            })
+          });
+          return;
         case "hospitals":
           hospitalProvider.getHospitalsJSON().then((hospitals) => {
             this.setState(() {
@@ -78,7 +90,18 @@ class _AdminTablePageState extends State<AdminTablePage> {
         hospitals.remove(del);
       });
     }
+  }
 
+  void addCreatedApiKey(Apikey key) {
+    this.setState(() {
+      apiKeys.add(key);
+    });
+  }
+
+  void deleteApiKey(Apikey key) {
+    this.setState(() {
+      apiKeys.remove(key);
+    });
   }
 
   @override
@@ -107,7 +130,15 @@ class _AdminTablePageState extends State<AdminTablePage> {
                     FeatherIcons.arrowLeft,
                     size: 25.0,
                   )),
-            )),
+            )
+        ),
+        floatingActionButton: widget.type == "apikeys" && authorized ? FloatingActionButton(
+          onPressed: () =>  (showBarModalBottomSheet(
+            context: context,
+            builder: (context) => (CreateApiKeyModal(addCreatedApiKey, widget.auth)),
+          )),
+          child: const Icon(FeatherIcons.plus),
+        ) : null,
         body: isLoading ? LoadingPage()
             : !authorized ? Center(child: Text("You do no have permission to view this page."))
             : widget.type == "hospitals" ? Container(
@@ -144,9 +175,9 @@ class _AdminTablePageState extends State<AdminTablePage> {
             child: Container(
                 child: ListView.separated(
                     padding: const EdgeInsets.all(8),
-                    itemCount: users.length,
+                    itemCount: apiKeys.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return UserCard(users[index], widget.auth);
+                      return ApiKeyCard(apiKeys[index], widget.auth, this.deleteApiKey);
                     },
                     separatorBuilder: (context, index) {
                       return const Divider(

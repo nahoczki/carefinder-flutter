@@ -21,21 +21,21 @@ class HospitalAdminCard extends StatefulWidget {
 }
 
 class _HospitalAdminCardState extends State<HospitalAdminCard> {
-  Icon icon = Icon(FeatherIcons.trash);
+  Icon icon = Icon(FeatherIcons.trash2, size: 20);
 
   void changeIcon(bool ok) async {
     if (!ok) {
       this.setState(() {
-        this.icon = Icon(FeatherIcons.x, color: Colors.red,);
+        this.icon = Icon(FeatherIcons.x, color: Colors.red, size: 20);
       });
     } else {
       this.setState(() {
-        this.icon = Icon(FeatherIcons.check, color: Colors.green,);
+        this.icon = Icon(FeatherIcons.check, color: Colors.green, size: 20);
       });
     }
 
     await Future.delayed(const Duration(seconds: 1), (){});
-    icon = Icon(FeatherIcons.trash);
+    icon = Icon(FeatherIcons.trash2, size: 20,);
   }
 
   @override

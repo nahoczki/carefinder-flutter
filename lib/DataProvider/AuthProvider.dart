@@ -6,6 +6,8 @@ import 'package:localstore/localstore.dart';
 import 'dart:convert';
 import 'dart:async';
 
+import 'Apikey.dart';
+
 class AuthProvider {
   final String apiKey = dotenv.env['API_KEY'];
   final String urlSlug = dotenv.env['API_URL'];
@@ -121,6 +123,67 @@ class AuthProvider {
       // then throw an exception.
       // TODO: Add better error messages
       throw Exception("no permissions");
+    }
+  }
+
+  Future<List<Apikey>> getApiKeys() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final response = await http
+        .get(Uri.parse('$urlSlug/apikeys'), headers: {"key": apiKey, "Authorization" : prefs.getString("auth")});
+
+    if (response.statusCode == 200) {
+
+      final List decode = json.decode(response.body)["data"];
+
+      final List<Apikey> keys = decode.map((e) => Apikey.fromJSON(e)).toList();
+
+
+      return keys;
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      // TODO: Add better error messages
+      throw Exception("no permissions");
+    }
+  }
+
+  Future<Apikey> createApiKey(String name) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final response = await http
+        .post(Uri.parse('$urlSlug/apikeys?name=$name'), headers: {"key": apiKey, "Authorization" : prefs.getString("auth")});
+
+    //print('$urlSlug/auth/login?email=$email&password=$password');
+
+
+    if (response.statusCode == 200) {
+
+      final dynamic decode = json.decode(response.body)["data"];
+      final Apikey key = Apikey.fromJSON(decode);
+
+      return key;
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      // TODO: Add better error messages
+      throw Exception("Error creating key");
+    }
+  }
+
+  Future<bool> deleteApiKey(String key) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final response = await http
+        .delete(Uri.parse('$urlSlug/apikeys?apikey=$key'), headers: {"key": apiKey, "Authorization" : prefs.getString("auth")});
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      // TODO: Add better error messages
+      throw Exception("Error creating key");
     }
   }
 }
